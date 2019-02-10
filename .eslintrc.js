@@ -6,5 +6,12 @@ module.exports = {
         ecmaFeatures: {
             experimentalObjectRestSpread: true
         }
+    },
+    globals: {
+        document: true,
+        FileReader: true
+    },
+    rules: {
+        'react/jsx-closing-bracket-location': [2, 'props-aligned']
     }
 };

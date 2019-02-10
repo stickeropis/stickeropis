@@ -1,0 +1,10 @@
+.tasks-page
+{
+    &__task
+    {
+        & + &
+        {
+            margin: 10px 0 0;
+        }
+    }
+}

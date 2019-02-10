@@ -15,7 +15,9 @@ export default class Menu extends React.Component {
                 {items.map(item => {
                     return (
                         <li key={item} className={b('item')}>
-                            <Link href={`/${item}-config`}>{item}</Link>
+                            <Link href={`/${item}-config`}>
+                                <a>{item}</a>
+                            </Link>
                         </li>
                     );
                 })}
