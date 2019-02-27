@@ -4,6 +4,10 @@ import Link from 'next/link';
 
 import './index.scss';
 
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 const b = block('menu');
 
 export default class Menu extends React.Component {
@@ -11,21 +15,17 @@ export default class Menu extends React.Component {
         const items = ['csv'];
 
         return (
-            <ul className={b()}>
+            <List className={b()}>
                 {items.map(item => {
                     return (
-                        <li key={item} className={b('item')}>
+                        <ListItem key={item}>
                             <Link href={`/${item}-config`}>
-                                <a>{item}</a>
+                                <Button variant="contained" color="secondary">{item}</Button>
                             </Link>
-                        </li>
+                        </ListItem>
                     );
                 })}
-            </ul>
+            </List>
         );
-    }
-
-    _onItemClick = item => {
-        return () => console.log(item);
     }
 }

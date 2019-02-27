@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { block } from 'bem-cn';
 import Head from 'next/head';
 
+import Button from '@material-ui/core/Button';
+
 import './index.scss';
 
 const b = block('tasks-page');
@@ -24,7 +26,7 @@ class TasksPage extends React.Component {
                     </div>
                 ))}
                 <Link href={`/print`}>
-                    <a>Далее</a>
+                    <Button variant="contained" color="primary">Далее</Button>
                 </Link>
             </div>
         );

@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { block } from 'bem-cn';
 import Head from 'next/head';
 
+import Button from '@material-ui/core/Button';
+
 import CsvInput from 'components/csv-input';
 
 import './index.scss';
@@ -26,23 +28,23 @@ class CsvConfigPage extends React.Component {
                     <title>CSV конфигурация</title>
                 </Head>
                 <h2 className={b('title')}>Выберите файл:</h2>
-                <CsvInput onChange={this._onFileChange} />
+                <CsvInput onChange={this.onFileChange} />
                 {this.props.tasks.length > 0 && (
-                    <Link href={`/tasks`}>
-                        <a>Далее</a>
+                    <Link href="/tasks">
+                        <Button variant="contained" color="primary">Далее</Button>
                     </Link>
                 )}
             </div>
         );
     }
 
-    _onFileChange = csv => {
-        const tasks = this._parseCsv(csv);
+    onFileChange = csv => {
+        const tasks = this.parseCsv(csv);
 
         this.props.storeTasks(tasks);
     }
 
-    _parseCsv = csv => {
+    parseCsv = csv => {
         return csv
             .split('\n')
             .map(row => {
@@ -56,7 +58,7 @@ class CsvConfigPage extends React.Component {
                     .reduce((rowData, cell, index) => {
                         const field = this._fields[index];
 
-                        rowData[field] = this._parseCell(cell);
+                        rowData[field] = this.parseCell(cell);
 
                         return rowData;
                     }, {});
@@ -64,7 +66,7 @@ class CsvConfigPage extends React.Component {
             .filter(Boolean);
     }
 
-    _parseCell = cell => {
+    parseCell = cell => {
         return cell.replace(/^"(.+?)"$/, '$1');
     }
 
