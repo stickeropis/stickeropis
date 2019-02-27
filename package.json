@@ -16,6 +16,7 @@
     "@zeit/next-sass": "1.0.1",
     "bem-cn": "3.0.1",
     "express": "4.16.4",
+    "isomorphic-fetch": "2.2.1",
     "jss": "9.8.7",
     "next": "7.0.2",
     "next-redux-wrapper": "3.0.0-alpha.0",
