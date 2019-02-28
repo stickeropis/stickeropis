@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "NODE_PATH=$(pwd) nodemon index.js",
+    "dev": "npm run dev:unix",
+    "dev:unix": "NODE_PATH=$(pwd) nodemon index.js",
+    "dev:windows": "set NODE_ENV=%cd% && nodemon index.js",
     "build": "next build",
     "start": "NODE_PATH=$(pwd) NODE_ENV=production node index.js",
     "lint": "npm-run-all lint:*",
