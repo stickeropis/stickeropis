@@ -1,5 +1,7 @@
+function pingController(req, res) {
+    res.send('pong');
+}
+
 module.exports = {
-    index: (req, res) => {
-        res.send('pong');
-    }
+    pingController
 };

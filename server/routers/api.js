@@ -1,11 +1,17 @@
-const ping = require('server/controllers/ping');
+const { Router } = require('express');
 
-const router = require('express').Router();
+const { pingController } = require('server/controllers/ping');
 
-module.exports = (app, server) => {
-    router
+function setupApiRouter(app, server) {
+    const apiRouter = Router();
+
+    apiRouter
         .route('/ping')
-        .get(ping.index);
+        .get(pingController);
 
-    server.use('/api', router);
+    server.use('/api', apiRouter);
+}
+
+module.exports = {
+    setupApiRouter
 };

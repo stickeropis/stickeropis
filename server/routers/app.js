@@ -1,23 +1,28 @@
-const router = require('express').Router();
+const { Router } = require('express');
 
-const indexRedirect = (req, res) => res.redirect('/');
+function indexRedirect(req, res) {
+    res.redirect('/');
+}
 
-module.exports = (app, server) => {
-    const handle = app.getRequestHandler();
+function setupAppRouter(app, server) {
+    const appRouter = Router();
+    const requestHandler = app.getRequestHandler();
 
-    router
+    appRouter
         .route('/tasks')
         .get(indexRedirect);
 
-    router
+    appRouter
         .route('/print')
         .get(indexRedirect);
 
-    router
+    appRouter
         .route('*')
-        .get((req, res) => {
-            return handle(req, res);
-        });
+        .get(requestHandler);
 
-    server.use('/', router);
+    server.use('/', appRouter);
+}
+
+module.exports = {
+    setupAppRouter
 };
