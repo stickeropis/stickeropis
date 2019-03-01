@@ -1,48 +1,53 @@
 # Сервис для печати стикеров
 
-## Быстрый старт
-1. ```npm install```
-2. ```npm run dev```
-3. Зайти на http://localhost:3000
+## Подготовка
 
+Для работы потребуется платформа NodeJS 10.
 
-## Необходимые технологии
-#### Node.js
-[Скачиваем lts версию](https://nodejs.org/en/download/) 
+### Способы установки
 
-Вместе с node.js ставится и пакетный менеджер npm
+В macOS:
 
-#### Git
-##### mac:
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install git
+```bash
+brew install node@10
 ```
 
-##### windows:
-[скачиваем](https://gitforwindows.org)
+В Debian и Ubuntu:
 
-##### linux:
-```
-sudo apt-get update
-$ sudo apt-get install git
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
 ```
 
-##### графический интерфейс:
-[тут](https://desktop.github.com)
+В Windows:
 
+1. Скачайте [установщик](https://nodejs.org/en/download/) LTS версии с официального сайта
+2. Кликайте `Next` пока не установится :)
 
-## Документация
+## Запуск
 
-  * [Material-UI](https://material-ui.com/demos/app-bar/) – библиотека готовых React компонент
-  * [React](https://reactjs.org/docs/getting-started.html)
-  * [Redux](https://react-redux.js.org/using-react-redux/connect-mapstate)
-  * [React-Redux пример](https://getinstance.info/articles/react/learning-react-redux/)
-  * [Express](http://expressjs.com/ru/guide/routing.html)
-  
-## Печать
-  * [Вадим Макишвили. Распечатай Яндекс.Карты. Видео](https://www.youtube.com/watch?v=7-qUm-N_fyA)
-  * [Вадим Макишвили. Распечатай Яндекс.Карты. Слайды](http://makishvili.github.io/print-and-go/)
-  * [Printing with CSS and Media Queries](https://developers.hp.com/node/287)
-  * [Using PDF to make webpages print beautifully](https://developers.hp.com/print-developers/doc/using-pdf-make-webpages-print-beautifully-0)
-  * [Media queries. Print styles.](https://learn-the-web.algonquindesign.ca/topics/media-queries/#print-styles)
+В первую очередь необходимо установить зависимости:
+
+```bash
+npm install
+```
+
+Запустить проект в режиме разработки можно следующим образом:
+
+```bash
+npm run dev
+```
+
+Он станет доступен в браузере по адресу http://localhost:3000.
+
+## Доступные команды
+
+Вызываются из терминала в формате `npm run <command>`
+
+| Команда  | Действие                                                   |
+| -------- | ---------------------------------------------------------- |
+| dev      | Запуск приложения в режиме разработки                      |
+| build    | Сборка скриптов, стилей и других ресурсов для production   |
+| start    | Запуск приложения в production режиме                      |
+| lint     | Проверка кода на потенциальные ошибки и соответствие стилю |
+| lint-fix | Исправление ошибок выявленных в процессе проверки          |
