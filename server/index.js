@@ -1,14 +1,14 @@
 const express = require('express');
-const apiRoute = require('server/routers/api');
-const appRoute = require('server/routers/app');
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const { setupApiRouter } = require('server/routers/api');
+const { setupAppRouter } = require('server/routers/app');
 
-module.exports = app => {
+function setupServer(nextApp) {
     const server = express();
+    const port = Number(process.env.PORT) || 3000;
 
-    apiRoute(app, server);
-    appRoute(app, server);
+    setupApiRouter(nextApp, server);
+    setupAppRouter(nextApp, server);
 
     server.listen(port, error => {
         if (error) {
@@ -17,4 +17,8 @@ module.exports = app => {
 
         console.log(`> Ready on http://localhost:${port}`);
     });
+}
+
+module.exports = {
+    setupServer
 };

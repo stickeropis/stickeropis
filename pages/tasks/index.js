@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import Link from 'next/link';
-
-import { block } from 'bem-cn';
 import Head from 'next/head';
-
 import Button from '@material-ui/core/Button';
+
+import { classname } from 'helpers/classname';
 
 import './index.scss';
 
-const b = block('tasks-page');
+const b = classname('tasks-page');
 
-class TasksPage extends React.Component {
+class TasksPage extends Component {
     render() {
         return (
             <div className={b()}>
@@ -25,7 +23,7 @@ class TasksPage extends React.Component {
                         {JSON.stringify(task)}
                     </div>
                 ))}
-                <Link href={`/print`}>
+                <Link href={`/print`} passHref>
                     <Button variant="contained" color="primary">Далее</Button>
                 </Link>
             </div>

@@ -1,14 +1,14 @@
-import React from 'react';
-import { block } from 'bem-cn';
+import React, { Component } from 'react';
 import Head from 'next/head';
 
 import Menu from 'components/menu';
+import { classname } from 'helpers/classname';
 
 import './index.scss';
 
-const b = block('index-page');
+const b = classname('index-page');
 
-export default class IndexPage extends React.Component {
+class IndexPage extends Component {
     render() {
         return (
             <div className={b()}>
@@ -21,3 +21,5 @@ export default class IndexPage extends React.Component {
         );
     }
 }
+
+export default IndexPage;

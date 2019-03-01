@@ -39,7 +39,7 @@ function createPageContext() {
 
 let pageContext = null;
 
-export default function getPageContext() {
+function getPageContext() {
 
     /*
         Make sure to create a new context for every server-side request so that data
@@ -56,3 +56,5 @@ export default function getPageContext() {
 
     return pageContext;
 }
+
+export default getPageContext;

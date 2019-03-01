@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import { storeTasks } from 'store/actions/tasks';
-
 import Link from 'next/link';
-
-import { block } from 'bem-cn';
 import Head from 'next/head';
-
 import Button from '@material-ui/core/Button';
 
 import CsvInput from 'components/csv-input';
+import { classname } from 'helpers/classname';
+import { storeTasks } from 'store/actions/tasks';
 
 import './index.scss';
 
-const b = block('csv-config-page');
+const b = classname('csv-config-page');
 
-class CsvConfigPage extends React.Component {
+class CsvConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'cost']
 
     render() {
@@ -30,7 +26,7 @@ class CsvConfigPage extends React.Component {
                 <h2 className={b('title')}>Выберите файл:</h2>
                 <CsvInput onChange={this.onFileChange} />
                 {this.props.tasks.length > 0 && (
-                    <Link href="/tasks">
+                    <Link href="/tasks" passHref>
                         <Button variant="contained" color="primary">Далее</Button>
                     </Link>
                 )}
@@ -87,4 +83,5 @@ function mapDispatchToProps(dispatch) {
         storeTasks
     }, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(CsvConfigPage);

@@ -1,16 +1,16 @@
-import React from 'react';
-import { block } from 'bem-cn';
+import React, { Component } from 'react';
 import Link from 'next/link';
-
-import './index.scss';
-
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-const b = block('menu');
+import { classname } from 'helpers/classname';
 
-export default class Menu extends React.Component {
+import './index.scss';
+
+const b = classname('menu');
+
+class Menu extends Component {
     render() {
         const items = ['csv'];
 
@@ -19,7 +19,7 @@ export default class Menu extends React.Component {
                 {items.map(item => {
                     return (
                         <ListItem key={item}>
-                            <Link href={`/${item}-config`}>
+                            <Link href={`/${item}-config`} passHref>
                                 <Button variant="contained" color="secondary">{item}</Button>
                             </Link>
                         </ListItem>
@@ -29,3 +29,5 @@ export default class Menu extends React.Component {
         );
     }
 }
+
+export default Menu;

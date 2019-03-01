@@ -1,14 +1,14 @@
-import React, { createRef } from 'react';
+import React, { createRef, Component } from 'react';
 import PropTypes from 'prop-types';
-import { block } from 'bem-cn';
+import Button from '@material-ui/core/Button';
+
+import { classname } from 'helpers/classname';
 
 import './index.scss';
 
-import Button from '@material-ui/core/Button';
+const b = classname('csv-input');
 
-const b = block('csv-input');
-
-export default class CsvInput extends React.Component {
+class CsvInput extends Component {
     input = createRef('input')
 
     render() {
@@ -44,3 +44,5 @@ export default class CsvInput extends React.Component {
         onChange: PropTypes.func
     }
 }
+
+export default CsvInput;
