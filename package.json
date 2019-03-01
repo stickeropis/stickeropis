@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon index.js",
-    "build": "cross-env NODE_PATH=. NODE_ENV=production next build",
-    "start": "cross-env NODE_PATH=. NODE_ENV=production node index.js",
+    "dev": "nodemon index.js",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node index.js",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint --ext .js,.jsx ./",
     "lint:styles": "stylelint ./**/*.scss",
