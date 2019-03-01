@@ -3,7 +3,7 @@ const express = require('express');
 const { setupApiRouter } = require('server/routers/api');
 const { setupAppRouter } = require('server/routers/app');
 
-function setupApp(nextApp) {
+function setupServer(nextApp) {
     const server = express();
     const port = Number(process.env.PORT) || 3000;
 
@@ -19,4 +19,6 @@ function setupApp(nextApp) {
     });
 }
 
-module.exports = setupApp;
+module.exports = {
+    setupServer
+};

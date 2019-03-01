@@ -1,6 +1,8 @@
 import { STORE_TASKS } from 'store/constants/tasks';
 
-const tasksInitialState = {};
+const tasksInitialState = {
+    list: []
+};
 
 function storeTasks(state, action) {
     return {
