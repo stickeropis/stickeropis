@@ -8,8 +8,7 @@
     "lint:js": "eslint --ext .js,.jsx ./",
     "lint-fix": "npm-run-all lint-fix:*",
     "lint-fix:css": "stylelint --fix ./**/*.scss",
-    "lint-fix:js": "eslint --fix --ext .js,.jsx ./",
-    "prepush": "npm run lint"
+    "lint-fix:js": "eslint --fix --ext .js,.jsx ./"
   },
   "dependencies": {
     "@material-ui/core": "3.9.2",
@@ -43,5 +42,10 @@
     "stylelint-config-iddqd": "1.1.0",
     "stylelint-order": "2.0.0",
     "stylelint-scss": "3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }
