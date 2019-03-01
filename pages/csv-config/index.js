@@ -26,7 +26,7 @@ class CsvConfigPage extends Component {
                 <h2 className={b('title')}>Выберите файл:</h2>
                 <CsvInput onChange={this.onFileChange} />
                 {this.props.tasks.length > 0 && (
-                    <Link href="/tasks">
+                    <Link href="/tasks" passHref>
                         <Button variant="contained" color="primary">Далее</Button>
                     </Link>
                 )}

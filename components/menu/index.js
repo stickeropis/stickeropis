@@ -19,7 +19,7 @@ class Menu extends Component {
                 {items.map(item => {
                     return (
                         <ListItem key={item}>
-                            <Link href={`/${item}-config`}>
+                            <Link href={`/${item}-config`} passHref>
                                 <Button variant="contained" color="secondary">{item}</Button>
                             </Link>
                         </ListItem>

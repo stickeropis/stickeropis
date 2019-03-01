@@ -23,7 +23,7 @@ class TasksPage extends Component {
                         {JSON.stringify(task)}
                     </div>
                 ))}
-                <Link href={`/print`}>
+                <Link href={`/print`} passHref>
                     <Button variant="contained" color="primary">Далее</Button>
                 </Link>
             </div>
