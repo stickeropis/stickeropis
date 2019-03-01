@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "NODE_PATH=. NODE_ENV=development nodemon index.js",
-    "build": "NODE_PATH=. NODE_ENV=production next build",
-    "start": "NODE_PATH=. NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon index.js",
+    "build": "cross-env NODE_PATH=. NODE_ENV=production next build",
+    "start": "cross-env NODE_PATH=. NODE_ENV=production node index.js",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint --ext .js,.jsx ./",
     "lint:styles": "stylelint ./**/*.scss",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
+    "cross-env": "5.2.0",
     "eslint": "5.13.0",
     "eslint-config-iddqd": "1.2.0",
     "eslint-plugin-import": "2.16.0",
