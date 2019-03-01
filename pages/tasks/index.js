@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Button from '@material-ui/core/Button';
 
-import { cn } from '../../helpers/classname';
+import { cn } from 'helpers/classname';
 
 import './index.scss';
 

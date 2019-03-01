@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Head from 'next/head';
 
-import { cn } from '../../helpers/classname';
+import { cn } from 'helpers/classname';
 
 import './index.scss';
 

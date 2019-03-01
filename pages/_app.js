@@ -6,9 +6,9 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import getPageContext from '../helpers/getPageContext';
-import Fonts from '../components/fonts';
-import createStore from '../store';
+import getPageContext from 'helpers/getPageContext';
+import Fonts from 'components/fonts';
+import createStore from 'store';
 
 class CustomApp extends App {
     pageContext = getPageContext()

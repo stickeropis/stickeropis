@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 
-import Menu from '../../components/menu';
-import { cn } from '../../helpers/classname';
+import Menu from 'components/menu';
+import { cn } from 'helpers/classname';
 
 import './index.scss';
 

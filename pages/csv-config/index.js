@@ -6,13 +6,13 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Button from '@material-ui/core/Button';
 
-import { cn } from '../../helpers/classname';
-import CsvInput from '../../components/csv-input';
-import { storeTasks } from '../../store/actions/tasks';
+import CsvInput from 'components/csv-input';
+import { classname } from 'helpers/classname';
+import { storeTasks } from 'store/actions/tasks';
 
 import './index.scss';
 
-const b = cn('csv-config-page');
+const b = classname('csv-config-page');
 
 class CsvConfigPage extends React.Component {
     _fields = ['id', 'name', 'description', 'cost']

@@ -4,11 +4,11 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import { cn } from '../../helpers/classname';
+import { classname } from 'helpers/classname';
 
 import './index.scss';
 
-const b = cn('menu');
+const b = classname('menu');
 
 export default class Menu extends React.Component {
     render() {
