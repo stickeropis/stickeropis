@@ -4,11 +4,11 @@
     "build": "next build",
     "start": "NODE_ENV=production node index.js",
     "lint": "npm-run-all lint:*",
-    "lint:css": "stylelint ./**/*.scss",
     "lint:js": "eslint --ext .js,.jsx ./",
+    "lint:styles": "stylelint ./**/*.scss",
     "lint-fix": "npm-run-all lint-fix:*",
-    "lint-fix:css": "stylelint --fix ./**/*.scss",
-    "lint-fix:js": "eslint --fix --ext .js,.jsx ./"
+    "lint-fix:js": "eslint --fix --ext .js,.jsx ./",
+    "lint-fix:styles": "stylelint --fix ./**/*.scss"
   },
   "dependencies": {
     "@bem-react/classname": "1.4.4",

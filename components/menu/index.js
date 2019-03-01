@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -10,7 +10,7 @@ import './index.scss';
 
 const b = classname('menu');
 
-export default class Menu extends React.Component {
+class Menu extends Component {
     render() {
         const items = ['csv'];
 
@@ -29,3 +29,5 @@ export default class Menu extends React.Component {
         );
     }
 }
+
+export default Menu;

@@ -6,7 +6,7 @@ function storeTasks(state, action) {
     return { ...state, list: action.tasks };
 }
 
-export default handleActions(
+const tasksReducer = handleActions(
     {
         [STORE_TASKS]: storeTasks
     },
@@ -14,3 +14,5 @@ export default handleActions(
         list: []
     }
 );
+
+export default tasksReducer;

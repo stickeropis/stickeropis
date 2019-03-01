@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,7 +14,7 @@ import './index.scss';
 
 const b = classname('csv-config-page');
 
-class CsvConfigPage extends React.Component {
+class CsvConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'cost']
 
     render() {
@@ -83,4 +83,5 @@ function mapDispatchToProps(dispatch) {
         storeTasks
     }, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(CsvConfigPage);

@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import './index.scss';
 
-export default () => {
+const Fonts = () => {
     return (
         <Head>
             <link
@@ -13,3 +13,5 @@ export default () => {
         </Head>
     );
 };
+
+export default Fonts;

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Head from 'next/head';
 
-import { cn } from 'helpers/classname';
+import { classname } from 'helpers/classname';
 
 import './index.scss';
 
-const b = cn('print-page');
+const b = classname('print-page');
 
-class PrintPage extends React.Component {
+class PrintPage extends Component {
     render() {
         return (
             <div className={b()}>
