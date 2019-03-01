@@ -2,21 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import { storeTasks } from 'store/actions/tasks';
-
 import Link from 'next/link';
-
-import { block } from 'bem-cn';
 import Head from 'next/head';
-
 import Button from '@material-ui/core/Button';
 
-import CsvInput from 'components/csv-input';
+import { cn } from '../../helpers/classname';
+import CsvInput from '../../components/csv-input';
+import { storeTasks } from '../../store/actions/tasks';
 
 import './index.scss';
 
-const b = block('csv-config-page');
+const b = cn('csv-config-page');
 
 class CsvConfigPage extends React.Component {
     _fields = ['id', 'name', 'description', 'cost']

@@ -1,18 +1,14 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import JssProvider from 'react-jss/lib/JssProvider';
-
-import getPageContext from 'helpers/getPageContext';
-
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import createStore from 'store';
-
-import Fonts from 'components/fonts';
+import getPageContext from '../helpers/getPageContext';
+import Fonts from '../components/fonts';
+import createStore from '../store';
 
 class CustomApp extends App {
     pageContext = getPageContext()

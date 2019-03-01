@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import Link from 'next/link';
-
-import { block } from 'bem-cn';
 import Head from 'next/head';
-
 import Button from '@material-ui/core/Button';
+
+import { cn } from '../../helpers/classname';
 
 import './index.scss';
 
-const b = block('tasks-page');
+const b = cn('tasks-page');
 
 class TasksPage extends React.Component {
     render() {

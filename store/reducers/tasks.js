@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import { STORE_TASKS } from 'store/constants/tasks';
+import { STORE_TASKS } from '../constants/tasks';
 
 function storeTasks(state, action) {
     return { ...state, list: action.tasks };

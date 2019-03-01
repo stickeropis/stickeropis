@@ -52,6 +52,8 @@ npm run dev
 | lint     | Проверка кода на потенциальные ошибки и соответствие стилю |
 | lint-fix | Исправление ошибок выявленных в процессе проверки          |
 
-## Используемые библиотеки и фреймворки
+## Внешние зависимости
 
 - [cross-fetch](https://github.com/lquixada/cross-fetch) — Библиотека позволяющая делать HTTP запросы одинаковым образом как на клиенте, так и на сервере
+- [@bem-react/classname](https://github.com/bem/bem-react/tree/master/packages/classname) — Библиотека для формирования имён классов в БЭМ-стиле
+- [@bem-react/classnames](https://github.com/bem/bem-react/tree/master/packages/classnames) — Библиотека для создания "миксов" из нескольких классов

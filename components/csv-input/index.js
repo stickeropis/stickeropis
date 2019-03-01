@@ -1,12 +1,12 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
-import { block } from 'bem-cn';
+import Button from '@material-ui/core/Button';
+
+import { cn } from '../../helpers/classname';
 
 import './index.scss';
 
-import Button from '@material-ui/core/Button';
-
-const b = block('csv-input');
+const b = cn('csv-input');
 
 export default class CsvInput extends React.Component {
     input = createRef('input')

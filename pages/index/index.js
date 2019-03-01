@@ -1,12 +1,12 @@
 import React from 'react';
-import { block } from 'bem-cn';
 import Head from 'next/head';
 
-import Menu from 'components/menu';
+import Menu from '../../components/menu';
+import { cn } from '../../helpers/classname';
 
 import './index.scss';
 
-const b = block('index-page');
+const b = cn('index-page');
 
 export default class IndexPage extends React.Component {
     render() {
