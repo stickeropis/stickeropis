@@ -1,13 +1,13 @@
 const { Router } = require('express');
 
-const { pingController } = require('server/controllers/ping');
+const { ping } = require('server/controllers/ping');
 
 function setupApiRouter(app, server) {
     const apiRouter = Router();
 
     apiRouter
         .route('/ping')
-        .get(pingController);
+        .get(ping);
 
     server.use('/api', apiRouter);
 }

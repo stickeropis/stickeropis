@@ -1,7 +1,7 @@
-function pingController(req, res) {
+function ping(req, res) {
     res.send('pong');
 }
 
 module.exports = {
-    pingController
+    ping
 };
