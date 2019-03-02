@@ -8,8 +8,8 @@ import Button from '@material-ui/core/Button';
 import { classname } from 'helpers/classname';
 
 import './index.scss';
-import Filter from "./Filter";
-import TasksList from "./TasksList";
+import Filter from './Filter';
+import TasksList from './TasksList';
 
 const b = classname('tasks-page');
 
@@ -20,15 +20,17 @@ class TasksPage extends Component {
                 <Head>
                     <title>Задачи</title>
                 </Head>
-                <Filter/>
-                <TasksList/>
+                <Filter />
+                <TasksList />
                 {this.props.tasks.map(task => (
                     <div className={b('task')} key={task.id}>
                         {JSON.stringify(task)}
                     </div>
                 ))}
                 <Link href={`/print`} passHref>
-                    <Button variant="contained" color="primary">Далее</Button>
+                    <Button variant="contained" color="primary">
+                        Далее
+                    </Button>
                 </Link>
             </div>
         );
@@ -36,7 +38,7 @@ class TasksPage extends Component {
 
     static propTypes = {
         tasks: PropTypes.array
-    }
+    };
 }
 
 function mapStateToProps(state) {
