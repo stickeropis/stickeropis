@@ -1,10 +1,71 @@
+@media print
+{
+    html,
+    body
+    {
+        zoom: 1;
+    }
+
+    @page
+    {
+        size: a4 portrait;
+
+        margin: 0;
+    }
+}
+
 .print-page
 {
-    &__task
+    font-family: Times, 'Times New Roman', serif; /* Шрифт с засечками */
+
+    color: #000; /* Черный цвет текста */
+
+    &__stickers_isTemplate_yes .sticker
     {
-        & + &
+        @media print
         {
-            margin: 10px 0 0;
+            border-top-right-radius: 5mm;
+        }
+    }
+
+    &__stickers
+    {
+        display: grid;
+        grid-template: 1fr 1fr 1fr / 1fr 1fr;
+
+        align-items: center;
+        justify-items: center;
+
+        height: 100%;
+
+        border: 1px solid #000;
+
+    }
+
+    &_format_a4 &__stickers
+    {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+    }
+
+    &__tools
+    {
+        @media print
+        {
+            display: none;
+        }
+    }
+}
+
+@media print
+{
+    .print-page__stickers_isTemplate_no
+    {
+        &,
+        .sticker
+        {
+            border: none;
         }
     }
 }

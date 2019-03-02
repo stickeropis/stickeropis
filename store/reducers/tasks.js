@@ -50,7 +50,7 @@ export function filtersSelector(state) {
 }
 
 export function checkedTasksSelector(state) {
-    return state.tasks.filter(task =>
+    return state.tasks.list.filter(task =>
         checkedTaskIdsSelector(state).has(task.id)
     );
 }
