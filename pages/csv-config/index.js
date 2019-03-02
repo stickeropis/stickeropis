@@ -16,17 +16,19 @@ const b = classname('csv-config-page');
 
 class CsvConfigPage extends Component {
     _fields = [
-        'id',
-        'title',
-        'description',
-        'author',
         'priority',
         'storyPoints',
+        'author',
+        'title',
+        'description',
+        'assign',
+        'id',
         'date',
         'deadline',
         'sprint',
         'type',
         'tags',
+        'link',
         'other'
     ];
 
