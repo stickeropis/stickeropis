@@ -1,4 +1,5 @@
 const fetch = require('cross-fetch');
+const _ = require('lodash');
 
 async function getTasks(req, res) {
     const { project, token } = req.body;
@@ -17,18 +18,18 @@ async function getTasks(req, res) {
         const { issues } = data;
 
         res.json(issues.map(issue => ({
-            priority: issue.fields.priority.id,
+            priority: _.get(issue, 'fields.priority.id'),
             storyPoints: null,
-            author: issue.fields.creator.name,
-            title: issue.fields.summary,
-            description: issue.fields.issuetype.description,
-            id: issue.key,
-            date: issue.fields.created,
-            deadline: issue.fields.duedate,
+            author: _.get(issue, 'fields.creator.name'),
+            title: _.get(issue, 'fields.summary'),
+            description: _.get(issue, 'fields.issuetype.description'),
+            id: _.get(issue, 'key'),
+            date: _.get(issue, 'fields.created'),
+            deadline: _.get(issue, 'fields.duedate'),
             sprint: null,
-            type: issue.fields.issuetype.name,
+            type: _.get(issue, 'fields.issuetype.name'),
             tags: null,
-            assignee: issue.fields.assignee.name
+            assignee: _.get(issue, 'fields.assignee.name')
         })));
 
     } catch (err) {
