@@ -57,7 +57,7 @@ export default [
         date: new Date(2019, 1, 2),
         deadline: new Date(2019, 1, 2),
         sprint: '#29. Мартовский код',
-        type: 'bug'
+        type: 'bug',
         tags: ['Вёрстка']
     },
     {
@@ -75,4 +75,4 @@ export default [
         other: 'Собрать команду DevOps',
         tags: ['Деплой']
     }
-]
+];
