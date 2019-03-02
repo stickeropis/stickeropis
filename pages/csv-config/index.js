@@ -15,7 +15,7 @@ import './index.scss';
 const b = classname('csv-config-page');
 
 class CsvConfigPage extends Component {
-    _fields = ['id', 'name', 'description', 'cost']
+    _fields = ['id', 'name', 'description', 'cost'];
 
     render() {
         return (
@@ -38,7 +38,7 @@ class CsvConfigPage extends Component {
         const tasks = this.parseCsv(csv);
 
         this.props.storeTasks(tasks);
-    }
+    };
 
     parseCsv = csv => {
         return csv
@@ -60,11 +60,11 @@ class CsvConfigPage extends Component {
                     }, {});
             })
             .filter(Boolean);
-    }
+    };
 
     parseCell = cell => {
         return cell.replace(/^"(.+?)"$/, '$1');
-    }
+    };
 
     static propTypes = {
         tasks: PropTypes.array,

@@ -29,7 +29,7 @@ class IndexPage extends Component {
                 <Menu />
 
                 <p className={b('descr')}>
-                  Также вы можете распечатать <a href="/print/template">шаблон для печати</a>.
+                  Также вы можете распечатать <a href="/print?template">шаблон для печати</a>.
                   Он необходим для того, чтобы знать куда наклеить стикеры.
                 </p>
 

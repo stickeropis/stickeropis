@@ -13,10 +13,6 @@ function setupAppRouter(app, server) {
         .get(indexRedirect);
 
     appRouter
-        .route('/print')
-        .get(indexRedirect);
-
-    appRouter
         .route('*')
         .get(requestHandler);
 

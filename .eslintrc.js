@@ -10,6 +10,8 @@ module.exports = {
     globals: {
         document: true,
         FileReader: true,
+        window: true,
+        localStorage: true,
         expect: true,
         test: true,
         describe: true
