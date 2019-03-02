@@ -29,6 +29,34 @@ const priorityIds = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 ];
 
+const formInputs = [
+    {
+        id: 'id',
+        type: 'text', // text, multiline, select
+        // choices
+        //
+        label: 'Идентификатор',
+        required: true
+    },
+    {
+        id: 'name',
+        type: 'text',
+        label: 'Краткое описание',
+        required: true
+    },
+    {
+        id: 'description',
+        type: 'multiline',
+        label: 'Полное описание'
+    },
+    {
+        id: 'priority',
+        type: 'select',
+        label: 'Приоритет',
+        choices: priorityIds
+    }
+];
+
 class FormConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'priority'];
 
@@ -76,6 +104,66 @@ class FormConfigPage extends Component {
         }
     }
 
+    renderForm() {
+        const typeMethods = {
+            text: ({ id, label, required }) => (
+                <TextField
+                    id={`form-input-${id}`}
+                    label={label}
+                    margin="normal"
+                    required={required}
+                    value={this.state.task[id]}
+                    onChange={this.handleChange(id)}
+                    />
+            ),
+            multiline: ({ id, label, required }) => (
+                <TextField
+                    id={`form-input-${id}`}
+                    label={label}
+                    margin="normal"
+                    multiline
+                    required={required}
+                    value={this.state.task[id]}
+                    onChange={this.handleChange(id)}
+                    />
+            ),
+            select: ({ id, label, required, choices }) => (
+                <Select
+                    value={this.state.task[id]}
+                    label={label}
+                    required={required}
+                    margin="dense"
+                    onChange={this.handleChange(id)}
+                    >
+                    {
+                        choices.map(choice => (
+                            <MenuItem key={choice} value={choice}>{choice}</MenuItem>
+                        ))
+                    }
+                </Select>
+            )
+        };
+
+        return (
+            <form className={b('form')} noValidate autoComplete="off">
+                {formInputs.map(opts => (
+                    <FormGroup key={opts.id}>
+                        {typeMethods[opts.type](opts)}
+                    </FormGroup>
+                ))}
+
+                <Button
+                    onClick={this.storeSingleTask}
+                    >Добавить задачу
+                </Button>
+
+                <Link href="/tasks" passHref>
+                    <Button variant="contained" color="primary">Далее</Button>
+                </Link>
+            </form>
+        );
+    }
+
     render() {
         return (
             <div className={b()}>
@@ -90,59 +178,7 @@ class FormConfigPage extends Component {
                     }
                 </div>
 
-                <form className={b('form')} noValidate autoComplete="off">
-                    <FormGroup>
-                        <TextField
-                            id="form-input-id"
-                            label="Идентификатор"
-                            margin="normal"
-                            required
-                            value={this.state.task.id}
-                            onChange={this.handleChange('id')}
-                            />
-                    </FormGroup>
-                    <FormGroup>
-                        <TextField
-                            id="form-input-name"
-                            label="Краткое наименование"
-                            margin="normal"
-                            required
-                            value={this.state.task.name}
-                            onChange={this.handleChange('name')}
-                            />
-                    </FormGroup>
-                    <FormGroup>
-                        <TextField
-                            id="form-input-description"
-                            label="Полное наименование"
-                            margin="normal"
-                            onChange={this.handleChange('description')}
-                            multiline
-                            value={this.state.task.description}
-                            />
-                    </FormGroup>
-                    <FormGroup>
-                        <Select
-                            margin="dense"
-                            value={this.state.task.priority}
-                            label="Приоритет"
-                            onChange={this.handleChange('priority')}
-                            >
-                            {priorityIds.map(id => (
-                                <MenuItem key={id} value={id}>{id}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormGroup>
-
-                    <Button
-                        onClick={this.storeSingleTask}
-                        >Добавить задачу
-                    </Button>
-
-                    <Link href="/tasks" passHref>
-                        <Button variant="contained" color="primary">Далее</Button>
-                    </Link>
-                </form>
+                {this.renderForm()}
             </div>
         );
     }
