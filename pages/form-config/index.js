@@ -18,28 +18,54 @@ import { storeTasks } from 'store/actions/tasks';
 
 const b = classname('form-config-page');
 
+const defaultTask = {
+    id: '',
+    name: '',
+    description: '',
+    priority: 0 // 0..10
+};
+
 class FormConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'priority'];
 
     constructor(props) {
         super(props);
 
+        const task = { ...defaultTask };
+
         this.state = {
-            task: {
-                id: '',
-                name: '',
-                description: '',
-                priority: 0 // 0..10
-            }
+            task
         };
 
-        this.storeTask = this.storeTask.bind(this);
+        this.storeSingleTask = this.storeSingleTask.bind(this);
     }
 
-    storeTask() {
+    handleChange = name => event => {
+        const { state: { task } } = this;
+
+        this.setState({
+            task: {
+                ...task,
+                [name]: event.target.value
+            }
+        });
+    }
+
+    storeSingleTask() {
+        const { props: { tasks } } = this;
+
         this.props.storeTasks([
+            ...tasks,
             this.state.task
         ]);
+
+        const cleanupState = () => {
+            const task = { ...defaultTask };
+
+            this.setState({ task });
+        };
+
+        cleanupState();
     }
 
     render() {
@@ -51,7 +77,9 @@ class FormConfigPage extends Component {
                 <h2 className={b('title')}>Стикер</h2>
 
                 <div>
-                    Всего заданий добавлено: {this.props.tasks.length}
+                    Всего заданий добавлено: {
+                        (this.props.tasks && this.props.tasks.length) || 0
+                    }
                 </div>
 
                 <form className={b('form')} noValidate autoComplete="off">
@@ -61,6 +89,7 @@ class FormConfigPage extends Component {
                             label="Идентификатор"
                             margin="normal"
                             value={this.state.task.id}
+                            onChange={this.handleChange('id')}
                             />
                     </FormGroup>
                     <FormGroup>
@@ -69,6 +98,7 @@ class FormConfigPage extends Component {
                             label="Краткое наименование"
                             margin="normal"
                             value={this.state.task.name}
+                            onChange={this.handleChange('name')}
                             />
                     </FormGroup>
                     <FormGroup>
@@ -76,15 +106,17 @@ class FormConfigPage extends Component {
                             id="form-input-description"
                             label="Полное наименование"
                             margin="normal"
+                            onChange={this.handleChange('description')}
                             multiline
-                            value={this.state.description}
+                            value={this.state.task.description}
                             />
                     </FormGroup>
                     <FormGroup>
                         <Select
-                            margin="normal"
+                            margin="dense"
                             value={this.state.task.priority}
                             label="Приоритет"
+                            onChange={this.handleChange('priority')}
                             >
                             <MenuItem value={0}>0</MenuItem>
                             <MenuItem value={1}>1</MenuItem>
@@ -100,9 +132,8 @@ class FormConfigPage extends Component {
                         </Select>
                     </FormGroup>
 
-
                     <Button
-                        onClick={this.storeTask()}
+                        onClick={this.storeSingleTask}
                         >Добавить задачу
                     </Button>
 
@@ -122,7 +153,7 @@ class FormConfigPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        // TODO
+        tasks: state.tasks.list
     };
 }
 
