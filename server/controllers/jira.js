@@ -37,6 +37,29 @@ async function getTasks(req, res) {
     }
 }
 
+async function login(req, res) {
+
+    const { project, token } = req.body;
+
+    try {
+        const fetchedData = await fetch(`${project}/rest/api/2/myself`, {
+            method: 'get',
+            headers: {
+                'Authorization': `Basic ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await fetchedData.json();
+
+        res.json(data);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
 module.exports = {
-    getTasks
+    getTasks,
+    login
 };

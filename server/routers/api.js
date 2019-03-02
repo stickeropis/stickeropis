@@ -17,6 +17,10 @@ function setupApiRouter(app, server) {
         .route('/jira/tasks')
         .post(jsonParser, jira.getTasks);
 
+    apiRouter
+        .route('/jira/login')
+        .post(jsonParser, jira.login);
+
     server.use('/api', apiRouter);
 }
 

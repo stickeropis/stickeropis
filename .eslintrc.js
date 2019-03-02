@@ -9,6 +9,7 @@ module.exports = {
     },
     globals: {
         document: true,
+        localStorage: true,
         FileReader: true
     },
     rules: {
