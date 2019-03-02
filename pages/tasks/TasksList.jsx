@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -49,13 +49,12 @@ class TasksList extends Component {
                                     <Checkbox
                                         checked={this.allChecked}
                                         onChange={this.handleCheckAll}
-                                        />
+                                    />
                                 </TableCell>
                                 {Object.values(Headers).map(header => (
                                     <TableCell
                                         key={header.caption}
-                                        align="left"
-                                        >
+                                        align="left">
                                         {header.caption}
                                     </TableCell>
                                 ))}
@@ -75,13 +74,12 @@ class TasksList extends Component {
                                                     checked
                                                 )
                                             }
-                                            />
+                                        />
                                     </TableCell>
                                     {Object.keys(Headers).map(header => (
                                         <TableCell
                                             key={header.caption}
-                                            align="left"
-                                            >
+                                            align="left">
                                             {formatValue(task[header])}
                                         </TableCell>
                                     ))}
@@ -105,7 +103,11 @@ class TasksList extends Component {
     handleCheck = (id, checked) => {
         const currentChecked = this.state.checkedRows;
 
-        checked ? currentChecked.add(id) : currentChecked.delete(id);
+        if (checked) {
+            currentChecked.add(id);
+        } else {
+            currentChecked.delete(id);
+        }
         this.setState({ checkedRows: currentChecked });
     };
 
