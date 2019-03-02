@@ -75,4 +75,4 @@ export default [
         other: 'Собрать команду DevOps',
         tags: ['Деплой']
     }
-]
+];

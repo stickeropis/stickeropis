@@ -2,7 +2,7 @@ const { Router } = require('express');
 const bodyParser = require('body-parser');
 
 const { ping } = require('server/controllers/ping');
-const { getJiraTasks } = require('server/controllers/jira');
+const jira = require('server/controllers/jira');
 
 const jsonParser = bodyParser.json();
 
@@ -14,8 +14,8 @@ function setupApiRouter(app, server) {
         .get(ping);
 
     apiRouter
-        .route('/jira')
-        .post(jsonParser, getJiraTasks);
+        .route('/jira/tasks')
+        .post(jsonParser, jira.getTasks);
 
     server.use('/api', apiRouter);
 }

@@ -1,6 +1,6 @@
 const fetch = require('cross-fetch');
 
-async function getJiraTasks(req, res) {
+async function getTasks(req, res) {
     const { project, token } = req.body;
 
     try {
@@ -16,26 +16,26 @@ async function getJiraTasks(req, res) {
         const data = await fetchedData.json();
         const { issues } = data;
 
-        res.json(issues.map(e => ({
-            priority: e.fields.priority.id,
+        res.json(issues.map(issue => ({
+            priority: issue.fields.priority.id,
             storyPoints: null,
-            author: e.fields.creator.name,
-            title: e.fields.summary,
-            description: e.fields.issuetype.description,
-            id: e.key,
-            date: e.fields.created,
-            deadline: e.fields.duedate,
+            author: issue.fields.creator.name,
+            title: issue.fields.summary,
+            description: issue.fields.issuetype.description,
+            id: issue.key,
+            date: issue.fields.created,
+            deadline: issue.fields.duedate,
             sprint: null,
-            type: e.fields.issuetype.name,
+            type: issue.fields.issuetype.name,
             tags: null,
-            assignee: e.fields.assignee
+            assignee: issue.fields.assignee
         })));
 
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err);
     }
 }
 
 module.exports = {
-    getJiraTasks
+    getTasks
 };

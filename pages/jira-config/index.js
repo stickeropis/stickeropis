@@ -16,8 +16,6 @@ import fetch from 'cross-fetch';
 import { classname } from 'helpers/classname';
 import { storeTasks } from 'store/actions/tasks';
 
-import './index.scss';
-
 const b = classname('csv-config-page');
 
 class JiraConfigPage extends Component {
@@ -43,8 +41,8 @@ class JiraConfigPage extends Component {
         });
     }
 
-    async handleSubmit(e) {
-        e.preventDefault();
+    async handleSubmit(event) {
+        event.preventDefault();
 
         const { project, token } = this.state;
 
@@ -59,7 +57,7 @@ class JiraConfigPage extends Component {
 
         try {
 
-            const fetchedData = await fetch('/api/jira', {
+            const fetchedData = await fetch('/api/jira/tasks', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
@@ -126,10 +124,6 @@ class JiraConfigPage extends Component {
                 </form>
             </div>
         );
-    }
-
-    parseCell = cell => {
-        return cell.replace(/^"(.+?)"$/, '$1');
     }
 
     static propTypes = {
