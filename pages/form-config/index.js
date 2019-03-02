@@ -22,8 +22,12 @@ const defaultTask = {
     id: '',
     name: '',
     description: '',
-    priority: 0 // 0..10
+    priority: 1 // 0..10
 };
+
+const priorityIds = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+];
 
 class FormConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'priority'];
@@ -53,10 +57,11 @@ class FormConfigPage extends Component {
 
     storeSingleTask() {
         const { props: { tasks } } = this;
+        const { id, name } = this.state.task;
 
-        this.props.storeTasks([
+        const appendTask = task => this.props.storeTasks([
             ...tasks,
-            this.state.task
+            task
         ]);
 
         const cleanupState = () => {
@@ -65,7 +70,10 @@ class FormConfigPage extends Component {
             this.setState({ task });
         };
 
-        cleanupState();
+        if (id && name) {
+            appendTask(this.state.task);
+            cleanupState();
+        }
     }
 
     render() {
@@ -88,6 +96,7 @@ class FormConfigPage extends Component {
                             id="form-input-id"
                             label="Идентификатор"
                             margin="normal"
+                            required
                             value={this.state.task.id}
                             onChange={this.handleChange('id')}
                             />
@@ -97,6 +106,7 @@ class FormConfigPage extends Component {
                             id="form-input-name"
                             label="Краткое наименование"
                             margin="normal"
+                            required
                             value={this.state.task.name}
                             onChange={this.handleChange('name')}
                             />
@@ -118,17 +128,9 @@ class FormConfigPage extends Component {
                             label="Приоритет"
                             onChange={this.handleChange('priority')}
                             >
-                            <MenuItem value={0}>0</MenuItem>
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={6}>6</MenuItem>
-                            <MenuItem value={7}>7</MenuItem>
-                            <MenuItem value={8}>8</MenuItem>
-                            <MenuItem value={9}>9</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
+                            {priorityIds.map(id => (
+                                <MenuItem key={id} value={id}>{id}</MenuItem>
+                            ))}
                         </Select>
                     </FormGroup>
 
