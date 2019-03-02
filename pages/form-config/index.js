@@ -18,7 +18,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-
 import './index.scss';
 
 import { classname } from 'helpers/classname';
@@ -209,7 +208,7 @@ class FormConfigPage extends Component {
 
     renderList() {
         const tableItems = formInputs.filter(({ required }) => required);
-        const {props: { tasks } } = this;
+        const { props: { tasks } } = this;
 
         return (
             <Table className={b('task-list')}>
