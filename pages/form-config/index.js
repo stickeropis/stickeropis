@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from '@material-ui/core/FormGroup';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import './index.scss';
 
@@ -22,11 +23,16 @@ const defaultTask = {
     id: '',
     name: '',
     description: '',
-    priority: 1 // 0..10
+    priority: 1, // 0..10
+    cost: 1
 };
 
 const priorityIds = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+];
+
+const costIds = [
+    1, 2, 3, 4, 5
 ];
 
 const formInputs = [
@@ -54,6 +60,12 @@ const formInputs = [
         type: 'select',
         label: 'Приоритет',
         choices: priorityIds
+    },
+    {
+        id: 'cost',
+        type: 'select',
+        label: 'Сложность',
+        choices: costIds
     }
 ];
 
@@ -107,40 +119,47 @@ class FormConfigPage extends Component {
     renderForm() {
         const typeMethods = {
             text: ({ id, label, required }) => (
-                <TextField
-                    id={`form-input-${id}`}
-                    label={label}
-                    margin="normal"
-                    required={required}
-                    value={this.state.task[id]}
-                    onChange={this.handleChange(id)}
-                    />
+                <FormGroup>
+                    <TextField
+                        id={`form-input-${id}`}
+                        label={label}
+                        margin="normal"
+                        required={required}
+                        value={this.state.task[id]}
+                        onChange={this.handleChange(id)}
+                        />
+                </FormGroup>
             ),
             multiline: ({ id, label, required }) => (
-                <TextField
-                    id={`form-input-${id}`}
-                    label={label}
-                    margin="normal"
-                    multiline
-                    required={required}
-                    value={this.state.task[id]}
-                    onChange={this.handleChange(id)}
-                    />
+                <FormGroup>
+                    <TextField
+                        id={`form-input-${id}`}
+                        label={label}
+                        margin="normal"
+                        multiline
+                        required={required}
+                        value={this.state.task[id]}
+                        onChange={this.handleChange(id)}
+                        />
+                </FormGroup>
             ),
             select: ({ id, label, required, choices }) => (
-                <Select
-                    value={this.state.task[id]}
-                    label={label}
-                    required={required}
-                    margin="dense"
-                    onChange={this.handleChange(id)}
-                    >
-                    {
-                        choices.map(choice => (
-                            <MenuItem key={choice} value={choice}>{choice}</MenuItem>
-                        ))
-                    }
-                </Select>
+                <FormGroup>
+                    <InputLabel>{label}</InputLabel>
+                    <Select
+                        value={this.state.task[id]}
+                        label={label}
+                        required={required}
+                        margin="dense"
+                        onChange={this.handleChange(id)}
+                        >
+                        {
+                            choices.map(choice => (
+                                <MenuItem key={choice} value={choice}>{choice}</MenuItem>
+                            ))
+                        }
+                    </Select>
+                </FormGroup>
             )
         };
 
