@@ -12,6 +12,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import InputLabel from '@material-ui/core/InputLabel';
 
+import { DatePicker, MuiPickersUtilsProvider } from 'material-ui-pickers';
+
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,16 +25,26 @@ import './index.scss';
 import { classname } from 'helpers/classname';
 import { storeTasks } from 'store/actions/tasks';
 
+import moment from 'moment';
+
+import 'moment/locale/ru';
+import MomentUtils from '@date-io/moment';
+
+moment.locale('ru');
+
 const b = classname('form-config-page');
 
-const defaultTask = {
+const dateFormat = 'DD.MM.YYYY';
+
+const defaultTask = () => ({
     id: '',
     name: '',
     description: '',
     priority: 1, // 0..10
     cost: 1,
-    date: ''
-};
+    // date: moment().format(dateFormat)
+    date: new Date()
+});
 
 const priorityIds = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -81,13 +93,19 @@ const formInputs = [
     }
 ];
 
+const formatDateLabel = date => {
+    const m = moment(date);
+
+    return m.format(dateFormat);
+};
+
 class FormConfigPage extends Component {
     _fields = ['id', 'name', 'description', 'priority'];
 
     constructor(props) {
         super(props);
 
-        const task = { ...defaultTask };
+        const task = { ...defaultTask() };
 
         this.state = {
             task
@@ -98,11 +116,12 @@ class FormConfigPage extends Component {
 
     handleChange = name => event => {
         const { state: { task } } = this;
+        const value = typeof event.format === 'function' ? event._d : event.target.value;
 
         this.setState({
             task: {
                 ...task,
-                [name]: event.target.value
+                [name]: value
             }
         });
     }
@@ -117,7 +136,7 @@ class FormConfigPage extends Component {
         ]);
 
         const cleanupState = () => {
-            const task = { ...defaultTask };
+            const task = { ...defaultTask() };
 
             this.setState({ task });
         };
@@ -127,6 +146,8 @@ class FormConfigPage extends Component {
             cleanupState();
         }
     }
+
+
 
     renderForm() {
         const typeMethods = {
@@ -157,12 +178,8 @@ class FormConfigPage extends Component {
             ),
             date: ({ id, label, required }) => (
                 <FormGroup key={id}>
-                    <TextField
-                        id={`form-input-${id}`}
-                        type="date"
-                        label={label}
-                        margin="normal"
-                        required={required}
+                    <DatePicker
+                        labelFunc={formatDateLabel}
                         value={this.state.task[id]}
                         onChange={this.handleChange(id)}
                         />
@@ -190,9 +207,11 @@ class FormConfigPage extends Component {
 
         return (
             <form className={b('form')} noValidate autoComplete="off">
-                {formInputs.map(opts => (
-                    typeMethods[opts.type](opts)
-                ))}
+                <MuiPickersUtilsProvider utils={MomentUtils} locale="ru" moment={moment}>
+                    {formInputs.map(opts => (
+                        typeMethods[opts.type](opts)
+                    ))}
+                </MuiPickersUtilsProvider>
 
                 <Button
                     onClick={this.storeSingleTask}
