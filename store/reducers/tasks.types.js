@@ -58,7 +58,7 @@ export default [
         deadline: new Date(2019, 5, 2),
         sprint: '#29. Мартовский код',
         type: 'bug',
-        tags: ['Вёрстка']
+        tags: ['Вёрстка', 'Бэк']
     },
     {
         priority: 10,

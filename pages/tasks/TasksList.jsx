@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -5,66 +6,115 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
+import Checkbox from '@material-ui/core/Checkbox';
 
-let id = 0;
+import withStyles from '@material-ui/core/es/styles/withStyles';
 
-// eslint-disable-next-line
-function createData(name, calories, fat, carbs, protein) {
-    id += 1;
+import tasksMock from '../../store/reducers/tasks.types';
 
-    return { id, name, calories, fat, carbs, protein };
-}
+import formatValue from './tasks.helpers';
 
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9)
-];
+export const Headers = {
+    id: { caption: 'ID', type: 'string' },
+    title: { caption: 'Название', type: 'string' },
+    description: { caption: 'Описание', type: 'string' },
+    author: { caption: 'Автор', type: 'string' },
+    priority: { caption: 'Приоритет', type: 'string' },
+    storyPoints: { caption: 'Стоимость', type: 'string' },
+    date: { caption: 'Дата', type: 'object' },
+    deadline: { caption: 'Дедлайн', type: 'object' },
+    sprint: { caption: 'Спринт', type: 'string' },
+    type: { caption: 'Тип', type: 'string' },
+    tags: { caption: 'Теги', type: 'array' }
+};
 
 class TasksList extends Component {
+    state = {
+        checkedRows: new Set([])
+    };
+
     render() {
+        if (tasksMock.length === 0) {
+            return null;
+        }
+
         return (
             <>
                 <div>Список задач</div>
-                <Paper>
+                <StyledPaper>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Dessert (100g serving)</TableCell>
-                                <TableCell align="right">Calories</TableCell>
-                                <TableCell align="right">Fat (g)</TableCell>
-                                <TableCell align="right">Carbs (g)</TableCell>
-                                <TableCell align="right">Protein (g)</TableCell>
+                                <TableCell>
+                                    <Checkbox
+                                        checked={this.allChecked}
+                                        onChange={this.handleCheckAll}
+                                    />
+                                </TableCell>
+                                {Object.values(Headers).map(header => (
+                                    <TableCell
+                                        key={header.caption}
+                                        align="left">
+                                        {header.caption}
+                                    </TableCell>
+                                ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map(row => (
-                                <TableRow key={row.id}>
+                            {tasksMock.map(task => (
+                                <TableRow key={task.id}>
                                     <TableCell component="th" scope="row">
-                                        {row.name}
+                                        <Checkbox
+                                            checked={this.state.checkedRows.has(
+                                                task.id
+                                            )}
+                                            onChange={(_, checked) =>
+                                                this.handleCheck(
+                                                    task.id,
+                                                    checked
+                                                )
+                                            }
+                                        />
                                     </TableCell>
-                                    <TableCell align="right">
-                                        {row.calories}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.fat}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.carbs}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.protein}
-                                    </TableCell>
+                                    {Object.keys(Headers).map(header => (
+                                        <TableCell
+                                            key={header.caption}
+                                            align="left">
+                                            {formatValue(task[header])}
+                                        </TableCell>
+                                    ))}
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                </Paper>
+                </StyledPaper>
             </>
         );
     }
+
+    get allChecked() {
+        if (tasksMock.length === 0) {
+            return false;
+        }
+        return tasksMock.length === this.state.checkedRows.size;
+    }
+
+    handleCheck = (id, checked) => {
+        const currentChecked = this.state.checkedRows;
+        checked ? currentChecked.add(id) : currentChecked.delete(id);
+        this.setState({ checkedRows: currentChecked });
+    };
+
+    handleCheckAll = () => {
+        const newChecked = this.allChecked
+            ? this.state.checkedRows.clear()
+            : tasksMock.map(task => task.id);
+        this.setState({ checkedRows: new Set(newChecked) });
+    };
 }
 
 export default TasksList;
+
+const StyledPaper = withStyles({
+    root: { overflow: 'auto' }
+})(Paper);
