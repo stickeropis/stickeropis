@@ -1,7 +1,37 @@
 .menu
 {
-    & + &
-    {
-        margin: 10px 0 0;
+    text-align: center;
+
+    &__wrap
+ {
+        display: inline-block;
+
+        text-align: left;
     }
+
+    &__menu-item
+    {
+        display: inline-block;
+
+        cursor: pointer;
+    }
+
+    &__imageBtn
+ {
+        width: 200px;
+        height: auto;
+        padding: .2em .75em; //отступы внутри
+
+        text-decoration: none; //убрать подчеркивание ссылки
+
+        border: 1px solid #ccc; // рамка
+        background: #eaeaea; //фон
+
+    }
+
+    &__image
+ {
+        width: 100%;
+    }
+
 }
