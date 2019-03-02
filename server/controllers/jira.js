@@ -28,7 +28,7 @@ async function getTasks(req, res) {
             sprint: null,
             type: issue.fields.issuetype.name,
             tags: null,
-            assignee: issue.fields.assignee
+            assignee: issue.fields.assignee.name
         })));
 
     } catch (err) {
