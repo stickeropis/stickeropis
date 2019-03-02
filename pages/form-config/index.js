@@ -32,8 +32,8 @@ const priorityIds = [
 const formInputs = [
     {
         id: 'id',
-        type: 'text', // text, multiline, select
-        // choices
+        type: 'text', // Variants: text, multiline, select
+        // May also be: choices
         //
         label: 'Идентификатор',
         required: true
