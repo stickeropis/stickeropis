@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 
-import Filter from './Filter';
+import Filter from "./Filter";
 
 class FilterList extends Component {
     render() {
@@ -14,12 +14,13 @@ class FilterList extends Component {
                 </Button>
                 <div>
                     {Array.from(this.props.filters).map(filter => {
-                        const handleClick = this.handleRemoveFilter(filter[0]);
+                        const handleClick = () =>
+                            this.handleRemoveFilter(filter[0]);
 
                         return (
                             <>
                                 <Filter
-                                    onChangeFilter={this.handleChangeFilter}
+                                    onChange={this.handleChange(filter[0])}
                                 />
                                 <Button onClick={handleClick}>X</Button>
                             </>
@@ -45,8 +46,10 @@ class FilterList extends Component {
         this.props.onChange(filters);
     };
 
-    handleChange = () => {
-        // todo
+    handleChange = id => (key, value) => {
+        const filters = new Map(this.props.filters);
+        filters.set(id, { [key]: value });
+        this.props.onChange(filters);
     };
 }
 

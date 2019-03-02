@@ -1,5 +1,6 @@
 /**
  * @typedef TaskM
+ * @property {id} string
  * @property {number} [priority] - Приоритет задачи от 0 до 10 (ноль это минорная задача)
  * @property {number} [storyPoints] - Стоимость/Вес выполнения задачи
  * @property {string} [author] - Логин того кто создал задачу

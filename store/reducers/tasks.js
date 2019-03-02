@@ -31,18 +31,18 @@ export function filteredTasksSelector(state, filters) {
  */
 export function filterTasks(filters, tasks) {
     return tasks.filter(t => {
-        return filters.every(([key, value]) => {
+        return filters.every(([key, value] = []) => {
             if (Array.isArray(value)) {
                 return value.includes(t[key]);
             }
             if (typeof value === 'string') {
-                return t[key] === value;
+                return (t[key] || '').toLowerCase().includes(value.toLowerCase());
             }
             if (typeof value === 'object') {
                 return filterByObject(value, t[key]);
             }
 
-            return false;
+            return true;
         });
     });
 }

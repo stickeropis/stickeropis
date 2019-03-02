@@ -17,7 +17,7 @@ const b = classname('tasks-page');
 
 class TasksPage extends Component {
     state = {
-        filters: []
+        filters: new Map()
     };
 
     render() {
@@ -29,7 +29,7 @@ class TasksPage extends Component {
                 <FilterList
                     filters={this.state.filters}
                     onChange={this.handleChangeFilter}
-                    />
+                />
                 <TasksList tasks={this.filteredTasks} />
                 <Link href={`/print`} passHref>
                     <Button variant="contained" color="primary">
@@ -45,11 +45,16 @@ class TasksPage extends Component {
     };
 
     get filteredTasks() {
-        if (this.state.filters.length === 0) {
+        if (this.state.filters.size === 0) {
             return this.props.tasks;
         }
 
-        return filterTasks(Array.from(this.state.filters), this.props.tasks);
+        // Readonly code
+        const filters = Array.from(this.state.filters.values()).flatMap(item =>
+            Object.entries(item)
+        );
+
+        return filterTasks(filters, this.props.tasks);
     }
 
     handleChangeFilter = filters => this.setState({ filters });

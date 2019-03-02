@@ -61,7 +61,7 @@ class TasksList extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {tasksMock.map(task => (
+                            {this.props.tasks.map(task => (
                                 <TableRow key={task.id}>
                                     <TableCell component="th" scope="row">
                                         <Checkbox
