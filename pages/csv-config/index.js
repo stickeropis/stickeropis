@@ -15,7 +15,20 @@ import './index.scss';
 const b = classname('csv-config-page');
 
 class CsvConfigPage extends Component {
-    _fields = ['id', 'name', 'description', 'cost'];
+    _fields = [
+        'id',
+        'title',
+        'description',
+        'author',
+        'priority',
+        'storyPoints',
+        'date',
+        'deadline',
+        'sprint',
+        'type',
+        'tags',
+        'other'
+    ];
 
     render() {
         return (
