@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 
-import Filter from "./Filter";
+import Filter from './Filter';
 
 class FilterList extends Component {
     render() {
@@ -20,6 +20,7 @@ class FilterList extends Component {
                         return (
                             <>
                                 <Filter
+                                    value={filter}
                                     onChange={this.handleChange(filter[0])}
                                 />
                                 <Button onClick={handleClick}>X</Button>
@@ -35,7 +36,7 @@ class FilterList extends Component {
         const filters = new Map(this.props.filters);
         const id = Number(Date.now());
 
-        filters.set(id, { id });
+        filters.set(id, { key: '', id });
         this.props.onChange(filters);
     };
 

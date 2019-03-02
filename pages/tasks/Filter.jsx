@@ -9,32 +9,27 @@ import TextField from '@material-ui/core/TextField';
 import { Headers } from './TasksList';
 
 class Filter extends React.Component {
-    state = {
-        key: '',
-        type: '',
-        value: null,
-        values: null,
-        from: null,
-        to: null
-    };
-
     render() {
+        const [key, value] = Object.entries(this.props.value[1])[0];
         return (
             <FormControl>
-                <Select value={this.state.key} onChange={this.handleChangeKey}>
+                <Select value={key} onChange={this.handleChangeKey}>
                     {Object.entries(Headers).map(([key, header]) => (
                         <MenuItem key={key} value={key}>
                             {header.caption}
                         </MenuItem>
                     ))}
                 </Select>
-                {this.renderContol(this.state.key)}
+                {this.renderControl(key, value)}
             </FormControl>
         );
     }
 
-    renderContol(key) {
+    renderControl(key, value) {
         if (!key) {
+            return null;
+        }
+        if (!Headers[key]) {
             return null;
         }
 
@@ -49,22 +44,20 @@ class Filter extends React.Component {
             default: {
                 return (
                     <TextField
-                        value={this.state.value}
-                        onChange={this.handleStringFilterChange}
-                        />
+                        value={value}
+                        onChange={this.handleStringFilterChange(key)}
+                    />
                 );
             }
         }
     }
 
-    handleStringFilterChange = e => {
-        this.setState({ value: e.target.value }, () => {
-            this.props.onChange(this.state.key, this.state.value);
-        });
+    handleStringFilterChange = key => e => {
+        this.props.onChange(key, e.target.value);
     };
 
     handleChangeKey = event => {
-        this.setState({ key: event.target.value });
+        this.props.onChange(event.target.value, '');
     };
 }
 
