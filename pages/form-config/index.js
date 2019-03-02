@@ -24,7 +24,8 @@ const defaultTask = {
     name: '',
     description: '',
     priority: 1, // 0..10
-    cost: 1
+    cost: 1,
+    date: ''
 };
 
 const priorityIds = [
@@ -66,6 +67,11 @@ const formInputs = [
         type: 'select',
         label: 'Сложность',
         choices: costIds
+    },
+    {
+        id: 'date',
+        type: 'date',
+        label: 'Дата создания'
     }
 ];
 
@@ -119,7 +125,7 @@ class FormConfigPage extends Component {
     renderForm() {
         const typeMethods = {
             text: ({ id, label, required }) => (
-                <FormGroup>
+                <FormGroup key={id}>
                     <TextField
                         id={`form-input-${id}`}
                         label={label}
@@ -131,7 +137,7 @@ class FormConfigPage extends Component {
                 </FormGroup>
             ),
             multiline: ({ id, label, required }) => (
-                <FormGroup>
+                <FormGroup key={id}>
                     <TextField
                         id={`form-input-${id}`}
                         label={label}
@@ -143,8 +149,21 @@ class FormConfigPage extends Component {
                         />
                 </FormGroup>
             ),
+            date: ({id, label, required }) => (
+                <FormGroup key={id}>
+                    <TextField
+                        id={`form-input-${id}`}
+                        type="date"
+                        label={label}
+                        margin="normal"
+                        required={required}
+                        value={this.state.task[id]}
+                        onChange={this.handleChange(id)}
+                        />
+                </FormGroup>
+            ),
             select: ({ id, label, required, choices }) => (
-                <FormGroup>
+                <FormGroup key={id}>
                     <InputLabel>{label}</InputLabel>
                     <Select
                         value={this.state.task[id]}
@@ -166,9 +185,7 @@ class FormConfigPage extends Component {
         return (
             <form className={b('form')} noValidate autoComplete="off">
                 {formInputs.map(opts => (
-                    <FormGroup key={opts.id}>
-                        {typeMethods[opts.type](opts)}
-                    </FormGroup>
+                    typeMethods[opts.type](opts)
                 ))}
 
                 <Button
