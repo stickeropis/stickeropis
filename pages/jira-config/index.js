@@ -49,7 +49,8 @@ class JiraConfigPage extends Component {
         const { project, token } = this.state;
 
         const jiraProject = project.length ? project : 'https://stickeropis.atlassian.net';
-        const jiraToken = token.length ? token : 'a2xpa2tuQHlhbmRleC5ydTpUQVplZWVqOHRBSll1QkhaakFxMzhGN0M';
+        const jiraToken = token.length ?
+            token : 'a2xpa2tuQHlhbmRleC5ydTpUQVplZWVqOHRBSll1QkhaakFxMzhGN0M';
 
         const body = JSON.stringify({
             project: jiraProject,
@@ -74,7 +75,7 @@ class JiraConfigPage extends Component {
         } catch (err) {
             console.log(err);
         }
-    };
+    }
 
     render() {
         return (
@@ -93,7 +94,7 @@ class JiraConfigPage extends Component {
                                 margin="normal"
                                 value={this.state.project}
                                 onChange={this.handleChange}
-                            />
+                                />
                         </ListItem>
 
                         <ListItem>
@@ -103,11 +104,13 @@ class JiraConfigPage extends Component {
                                 margin="normal"
                                 value={this.state.token}
                                 onChange={this.handleChange}
-                            />
+                                />
                         </ListItem>
 
                         <ListItem>
-                            <Button type="submit" variant="contained" color="primary">Get Tickets</Button>
+                            <Button type="submit" variant="contained" color="primary">
+                                Get Tickets
+                            </Button>
                         </ListItem>
                     </List>
 
