@@ -8,6 +8,11 @@ import Button from '@material-ui/core/Button';
 import { classname } from 'helpers/classname';
 
 import './index.scss';
+import { filteredTasksSelector, filtersSelector } from 'store/reducers/tasks';
+import { setFilters } from 'store/actions/tasks';
+
+import FilterList from './FilterList';
+import TasksList from './TasksList';
 
 const b = classname('tasks-page');
 
@@ -18,13 +23,16 @@ class TasksPage extends Component {
                 <Head>
                     <title>Задачи</title>
                 </Head>
-                {this.props.tasks.map(task => (
-                    <div className={b('task')} key={task.id}>
-                        {JSON.stringify(task)}
-                    </div>
-                ))}
+                <FilterList
+                    /* eslint-disable-next-line */
+                    filters={this.props.filters}
+                    onChange={this.handleChangeFilter}
+                    />
+                <TasksList tasks={this.props.tasks} />
                 <Link href={`/print`} passHref>
-                    <Button variant="contained" color="primary">Далее</Button>
+                    <Button variant="contained" color="primary">
+                        Далее
+                    </Button>
                 </Link>
             </div>
         );
@@ -32,13 +40,22 @@ class TasksPage extends Component {
 
     static propTypes = {
         tasks: PropTypes.array
-    }
+    };
+
+    handleChangeFilter = filters => {
+        // eslint-disable-next-line
+        return this.props.setFilters(filters);
+    };
 }
 
 function mapStateToProps(state) {
     return {
-        tasks: state.tasks.list
+        tasks: filteredTasksSelector(state),
+        filters: filtersSelector(state)
     };
 }
 
-export default connect(mapStateToProps)(TasksPage);
+export default connect(
+    mapStateToProps,
+    { setFilters }
+)(TasksPage);
