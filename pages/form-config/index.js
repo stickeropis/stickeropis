@@ -42,7 +42,8 @@ const defaultTask = () => ({
     description: '',
     priority: 1, // 0..10
     cost: 1,
-    date: new Date()
+    date: new Date(),
+    savedAt: null
 });
 
 const priorityIds = [
@@ -56,13 +57,15 @@ const formInputs = [
         // May also be: choices
         //
         label: 'Идентификатор',
-        required: true
+        required: true,
+        inList: true
     },
     {
         id: 'name',
         type: 'text',
         label: 'Краткое описание',
-        required: true
+        required: true,
+        inList: true
     },
     {
         id: 'description',
@@ -83,7 +86,8 @@ const formInputs = [
     {
         id: 'date',
         type: 'date',
-        label: 'Дата создания'
+        label: 'Дата создания',
+        inList: true
     }
 ];
 
@@ -93,9 +97,15 @@ const formatDateLabel = date => {
     return m.format(dateFormat);
 };
 
-class FormConfigPage extends Component {
-    _fields = ['id', 'name', 'description', 'priority'];
+const formatCellValue = value => {
+    if (value.constructor && value.constructor.name === 'Date') {
+        return formatDateLabel(value);
+    }
 
+    return value;
+};
+
+class FormConfigPage extends Component {
     constructor(props) {
         super(props);
 
@@ -126,7 +136,7 @@ class FormConfigPage extends Component {
 
         const appendTask = task => this.props.storeTasks([
             ...tasks,
-            task
+            { ...task, saved: Date.now() }
         ]);
 
         const cleanupState = () => {
@@ -198,6 +208,8 @@ class FormConfigPage extends Component {
             )
         };
 
+        const { state: { task } } = this;
+
         return (
             <form className={b('form')} noValidate autoComplete="off">
                 <MuiPickersUtilsProvider utils={MomentUtils} locale="ru" moment={moment}>
@@ -208,7 +220,7 @@ class FormConfigPage extends Component {
 
                 <Button
                     onClick={this.storeSingleTask}
-                    >Добавить задачу
+                    >{task.saved ? 'Обновить задачу' : 'Добавить задачу'}
                 </Button>
 
                 <Link href="/tasks" passHref>
@@ -219,7 +231,7 @@ class FormConfigPage extends Component {
     }
 
     renderList() {
-        const tableItems = formInputs.filter(({ required }) => required);
+        const tableItems = formInputs.filter(({ inList }) => inList);
         const { props: { tasks } } = this;
 
         return (
@@ -236,11 +248,11 @@ class FormConfigPage extends Component {
                 <TableBody>
                     {
                         tasks.map(task => (
-                            <TableRow key={task.id}>
+                            <TableRow key={task.saved}>
                                 {
                                     tableItems.map(({ id }) => (
                                         <TableCell key={`${id}-${task.id}`}>
-                                            {task[id]}
+                                            {formatCellValue(task[id])}
                                         </TableCell>
                                     ))
                                 }
