@@ -8,7 +8,8 @@
     "lint:styles": "stylelint ./**/*.scss",
     "lint-fix": "npm-run-all lint-fix:*",
     "lint-fix:js": "eslint --fix --ext .js,.jsx ./",
-    "lint-fix:styles": "stylelint --fix ./**/*.scss"
+    "lint-fix:styles": "stylelint --fix ./**/*.scss",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@bem-react/classname": "1.4.4",
