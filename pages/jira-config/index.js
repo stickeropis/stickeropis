@@ -70,8 +70,6 @@ class JiraConfigPage extends Component {
 
             this.props.storeTasks(tasks);
 
-            console.log(tasks);
-
         } catch (err) {
             console.log(err);
         }
