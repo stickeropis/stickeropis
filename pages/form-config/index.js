@@ -42,7 +42,6 @@ const defaultTask = () => ({
     description: '',
     priority: 1, // 0..10
     cost: 1,
-    // date: moment().format(dateFormat)
     date: new Date()
 });
 
@@ -147,8 +146,6 @@ class FormConfigPage extends Component {
         }
     }
 
-
-
     renderForm() {
         const typeMethods = {
             text: ({ id, label, required }) => (
@@ -176,8 +173,9 @@ class FormConfigPage extends Component {
                         />
                 </FormGroup>
             ),
-            date: ({ id, label, required }) => (
+            date: ({ id, label }) => (
                 <FormGroup key={id}>
+                    <InputLabel>{label}</InputLabel>
                     <DatePicker
                         labelFunc={formatDateLabel}
                         value={this.state.task[id]}
