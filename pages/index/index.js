@@ -34,7 +34,7 @@ class IndexPage extends Component {
                 </p>
 
                 <div className={b('template-button-wrap')}>
-                    <Link href="print/template" passHref>
+                    <Link href="/print?template" passHref>
                         <Button className={b('imageBtn')}>
                             <img className={b(`image`)} src={`static/images/template.png`} />
                         </Button>

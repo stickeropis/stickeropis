@@ -208,7 +208,11 @@ class PrintPage extends Component {
         }
 
         if (raw instanceof Date) {
-            return raw.toLocaleDateString();
+            return [
+                raw.getFullYear(),
+                String(raw.getMonth() + 1).padStart(2, '0'),
+                String(raw.getDate()).padStart(2, '0')
+            ].join('.');
         }
 
         return raw;
@@ -263,7 +267,7 @@ class PrintPage extends Component {
                             Распечатать стикеры
                         </Button>
                     }
-                    <br />
+
                     {
                         !lockTemplate &&
                         <Preview>

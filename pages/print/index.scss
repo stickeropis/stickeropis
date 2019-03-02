@@ -16,7 +16,6 @@
 
 .print-page
 {
-    font-family: Times, 'Times New Roman', serif; /* Шрифт с засечками */
 
     color: #000; /* Черный цвет текста */
 
@@ -51,6 +50,11 @@
 
     &__tools
     {
+        .preview
+        {
+            margin: 10px auto;
+        }
+
         @media print
         {
             display: none;
