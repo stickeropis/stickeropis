@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
