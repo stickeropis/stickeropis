@@ -1,7 +1,47 @@
 .index-page
 {
+    &__root
+ {
+        max-width: 1100px;
+        margin: 100px auto;
+    }
+
     &__title
     {
-        font-weight: 300;
+        text-align: center;
+    }
+
+    &__subtitle
+ {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &__descr
+ {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    &__template-button-wrap
+ {
+        text-align: center;
+    }
+
+    &__imageBtn
+ {
+        width: 200px;
+        height: auto;
+        padding: .2em .75em; //отступы внутри
+
+        text-decoration: none; //убрать подчеркивание ссылки
+
+        border: 1px solid #ccc; // рамка
+        background: #eaeaea; //фон
+    }
+
+    &__image
+ {
+        width: 100%;
     }
 }

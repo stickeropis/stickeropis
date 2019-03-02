@@ -1,5 +1,6 @@
 /**
  * @typedef TaskM
+ * @property {id} string
  * @property {number} [priority] - Приоритет задачи от 0 до 10 (ноль это минорная задача)
  * @property {number} [storyPoints] - Стоимость/Вес выполнения задачи
  * @property {string} [author] - Логин того кто создал задачу
@@ -30,7 +31,7 @@ export default [
         id: 'STICKER-101',
         date: new Date(2019, 1, 2),
         deadline: new Date(2019, 1, 2),
-        sprint: '#29. Мартовский код',
+        sprint: '#30. Мартовский код',
         type: 'task',
         tags: ['Вёрстка']
     },
@@ -55,7 +56,7 @@ export default [
         description: 'При первом посещении сайта не применяются все стили',
         id: 'STICKER-103',
         date: new Date(2019, 1, 2),
-        deadline: new Date(2019, 1, 2),
+        deadline: new Date(2019, 5, 2),
         sprint: '#29. Мартовский код',
         type: 'bug',
         tags: ['Вёрстка']
@@ -69,7 +70,7 @@ export default [
         id: 'STICKER-104',
         date: new Date(2019, 1, 2),
         deadline: new Date(2019, 1, 2),
-        sprint: '#29. Мартовский код',
+        sprint: '#28. Код',
         type: 'task',
         link: ['STICKER-101', 'STICKER-102', 'STICKER-103'],
         other: 'Собрать команду DevOps',

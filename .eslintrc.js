@@ -9,8 +9,12 @@ module.exports = {
     },
     globals: {
         document: true,
+        FileReader: true,
+        window: true,
         localStorage: true,
-        FileReader: true
+        expect: true,
+        test: true,
+        describe: true
     },
     rules: {
         'react/jsx-closing-bracket-location': [2, 'props-aligned']

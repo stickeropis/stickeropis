@@ -172,6 +172,12 @@ class JiraConfigPage extends Component {
                                     onChange={this.handleChange}
                                     />
                             </ListItem>
+
+                            <ListItem>
+                                <Link href="https://confluence.atlassian.com/cloud/api-tokens-938839638.html" passHref>
+                                    How to get token
+                                </Link>
+                            </ListItem>
                         </List>
                     </form>
                 )}
