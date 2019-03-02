@@ -149,7 +149,7 @@ class FormConfigPage extends Component {
                         />
                 </FormGroup>
             ),
-            date: ({id, label, required }) => (
+            date: ({ id, label, required }) => (
                 <FormGroup key={id}>
                     <TextField
                         id={`form-input-${id}`}
