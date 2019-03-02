@@ -12,7 +12,7 @@ const b = classname('menu');
 
 class Menu extends Component {
     render() {
-        const items = ['csv'];
+        const items = ['csv', 'jira'];
 
         return (
             <List className={b()}>
