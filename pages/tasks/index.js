@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import { classname } from 'helpers/classname';
 
 import './index.scss';
-import { filterTasks } from '../../store/reducers/tasks';
+import { filteredTasksSelector, filtersSelector } from 'store/reducers/tasks';
+import { setFilters } from 'store/actions/tasks';
 
 import FilterList from './FilterList';
 import TasksList from './TasksList';
@@ -16,10 +17,6 @@ import TasksList from './TasksList';
 const b = classname('tasks-page');
 
 class TasksPage extends Component {
-    state = {
-        filters: new Map()
-    };
-
     render() {
         return (
             <div className={b()}>
@@ -27,10 +24,11 @@ class TasksPage extends Component {
                     <title>Задачи</title>
                 </Head>
                 <FilterList
-                    filters={this.state.filters}
+                    /* eslint-disable-next-line */
+                    filters={this.props.filters}
                     onChange={this.handleChangeFilter}
-                />
-                <TasksList tasks={this.filteredTasks} />
+                    />
+                <TasksList tasks={this.props.tasks} />
                 <Link href={`/print`} passHref>
                     <Button variant="contained" color="primary">
                         Далее
@@ -44,26 +42,20 @@ class TasksPage extends Component {
         tasks: PropTypes.array
     };
 
-    get filteredTasks() {
-        if (this.state.filters.size === 0) {
-            return this.props.tasks;
-        }
-
-        // Readonly code
-        const filters = Array.from(this.state.filters.values()).flatMap(item =>
-            Object.entries(item)
-        );
-
-        return filterTasks(filters, this.props.tasks);
-    }
-
-    handleChangeFilter = filters => this.setState({ filters });
+    handleChangeFilter = filters => {
+        // eslint-disable-next-line
+        return this.props.setFilters(filters);
+    };
 }
 
 function mapStateToProps(state) {
     return {
-        tasks: state.tasks.list
+        tasks: filteredTasksSelector(state),
+        filters: filtersSelector(state)
     };
 }
 
-export default connect(mapStateToProps)(TasksPage);
+export default connect(
+    mapStateToProps,
+    { setFilters }
+)(TasksPage);

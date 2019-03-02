@@ -10,9 +10,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import withStyles from '@material-ui/core/es/styles/withStyles';
 
-import tasksMock from '../../store/reducers/tasks.types';
-
+import { setCheckedTasks } from '../../store/actions/tasks';
 import formatValue from './tasks.helpers';
+import { connect } from 'react-redux';
+import {
+    checkedTaskIdsSelector,
+    filteredTasksSelector
+} from '../../store/reducers/tasks';
 
 export const Headers = {
     id: { caption: 'ID', type: 'string' },
@@ -29,12 +33,9 @@ export const Headers = {
 };
 
 class TasksList extends Component {
-    state = {
-        checkedRows: new Set([])
-    };
 
     render() {
-        if (tasksMock.length === 0) {
+        if (this.props.tasks.length === 0) {
             return null;
         }
 
@@ -65,7 +66,7 @@ class TasksList extends Component {
                                 <TableRow key={task.id}>
                                     <TableCell component="th" scope="row">
                                         <Checkbox
-                                            checked={this.state.checkedRows.has(
+                                            checked={this.props.checkedRows.has(
                                                 task.id
                                             )}
                                             onChange={(_, checked) =>
@@ -93,34 +94,43 @@ class TasksList extends Component {
     }
 
     get allChecked() {
-        if (tasksMock.length === 0) {
+        if (this.props.tasks.length === 0) {
             return false;
         }
 
-        return tasksMock.length === this.state.checkedRows.size;
+        return this.props.tasks.length === this.props.checkedRows.size;
     }
 
     handleCheck = (id, checked) => {
-        const currentChecked = this.state.checkedRows;
+        const currentChecked = new Set(this.props.checkedRows);
 
         if (checked) {
             currentChecked.add(id);
         } else {
             currentChecked.delete(id);
         }
-        this.setState({ checkedRows: currentChecked });
+        this.props.setCheckedTasks(currentChecked);
     };
 
     handleCheckAll = () => {
         const newChecked = this.allChecked
-            ? this.state.checkedRows.clear()
-            : tasksMock.map(task => task.id);
+            ? []
+            : this.props.tasks.map(task => task.id);
 
-        this.setState({ checkedRows: new Set(newChecked) });
+        this.props.setCheckedTasks(new Set(newChecked));
     };
 }
+const mapStateToProps = state => {
+    return {
+        checkedRows: checkedTaskIdsSelector(state),
+        tasks: filteredTasksSelector(state)
+    };
+};
 
-export default TasksList;
+export default connect(
+    mapStateToProps,
+    { setCheckedTasks }
+)(TasksList);
 
 const StyledPaper = withStyles({
     root: { overflow: 'auto' }

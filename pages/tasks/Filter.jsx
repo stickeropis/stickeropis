@@ -1,16 +1,17 @@
-import React from "react";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+/* eslint-disable */
+import React from 'react';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 
-import { Headers } from "./TasksList";
+import { Headers } from './TasksList';
 
 class Filter extends React.Component {
     state = {
-        key: "",
-        type: "",
+        key: '',
+        type: '',
         value: null,
         values: null,
         from: null,
@@ -38,19 +39,19 @@ class Filter extends React.Component {
         }
 
         switch (Headers[key].type) {
-            case "array": {
+            case 'array': {
                 return <TextField />;
             }
-            case "object": {
+            case 'object': {
                 return <TextField />;
             }
-            case "string":
+            case 'string':
             default: {
                 return (
                     <TextField
                         value={this.state.value}
                         onChange={this.handleStringFilterChange}
-                    />
+                        />
                 );
             }
         }
