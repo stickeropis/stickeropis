@@ -12,6 +12,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import InputLabel from '@material-ui/core/InputLabel';
 
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+
+
 import './index.scss';
 
 import { classname } from 'helpers/classname';
@@ -200,6 +207,40 @@ class FormConfigPage extends Component {
         );
     }
 
+    renderList() {
+        const tableItems = formInputs.filter(({ required }) => required);
+        const {props: { tasks } } = this;
+
+        return (
+            <Table className={b('task-list')}>
+                <TableHead>
+                    <TableRow>
+                        {
+                            tableItems.map(({ id, label }) => (
+                                <TableCell key={id}>{label}</TableCell>
+                            ))
+                        }
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        tasks.map(task => (
+                            <TableRow key={task.id}>
+                                {
+                                    tableItems.map(({ id }) => (
+                                        <TableCell key={`${id}-${task.id}`}>
+                                            {task[id]}
+                                        </TableCell>
+                                    ))
+                                }
+                            </TableRow>
+                        ))
+                    }
+                </TableBody>
+            </Table>
+        );
+    }
+
     render() {
         return (
             <div className={b()}>
@@ -215,6 +256,8 @@ class FormConfigPage extends Component {
                 </div>
 
                 {this.renderForm()}
+
+                {this.renderList()}
             </div>
         );
     }
