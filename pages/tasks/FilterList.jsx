@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+
 import Filter from './Filter';
 
 class FilterList extends Component {
@@ -11,17 +13,18 @@ class FilterList extends Component {
                     + Добавить фильтр
                 </Button>
                 <div>
-                    {Array.from(this.props.filters).map(filter => (
-                        <>
-                            <Filter onChangeFilter={this.handleChangeFilter} />
-                            <Button
-                                onClick={() =>
-                                    this.handleRemoveFilter(filter[0])
-                                }>
-                                X
-                            </Button>
-                        </>
-                    ))}
+                    {Array.from(this.props.filters).map(filter => {
+                        const handleClick = this.handleRemoveFilter(filter[0]);
+
+                        return (
+                            <>
+                                <Filter
+                                    onChangeFilter={this.handleChangeFilter}
+                                />
+                                <Button onClick={handleClick}>X</Button>
+                            </>
+                        );
+                    })}
                 </div>
             </>
         );

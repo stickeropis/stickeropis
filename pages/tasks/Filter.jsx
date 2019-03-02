@@ -22,7 +22,8 @@ class Filter extends React.Component {
             <FormControl>
                 <Select
                     value={this.state.key}
-                    onChange={this.handleChangeFilter}>
+                    onChange={this.handleChangeFilter}
+                    >
                     {Object.entries(Headers).map(([key, header]) => (
                         <MenuItem key={key} value={key}>
                             {header.caption}

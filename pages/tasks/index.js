@@ -29,7 +29,7 @@ class TasksPage extends Component {
                 <FilterList
                     filters={this.state.filters}
                     onChange={this.handleChangeFilter}
-                />
+                    />
                 <TasksList tasks={this.filteredTasks} />
                 <Link href={`/print`} passHref>
                     <Button variant="contained" color="primary">

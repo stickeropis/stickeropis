@@ -49,12 +49,13 @@ class TasksList extends Component {
                                     <Checkbox
                                         checked={this.allChecked}
                                         onChange={this.handleCheckAll}
-                                    />
+                                        />
                                 </TableCell>
                                 {Object.values(Headers).map(header => (
                                     <TableCell
                                         key={header.caption}
-                                        align="left">
+                                        align="left"
+                                        >
                                         {header.caption}
                                     </TableCell>
                                 ))}
@@ -74,12 +75,13 @@ class TasksList extends Component {
                                                     checked
                                                 )
                                             }
-                                        />
+                                            />
                                     </TableCell>
                                     {Object.keys(Headers).map(header => (
                                         <TableCell
                                             key={header.caption}
-                                            align="left">
+                                            align="left"
+                                            >
                                             {formatValue(task[header])}
                                         </TableCell>
                                     ))}
@@ -96,11 +98,13 @@ class TasksList extends Component {
         if (tasksMock.length === 0) {
             return false;
         }
+
         return tasksMock.length === this.state.checkedRows.size;
     }
 
     handleCheck = (id, checked) => {
         const currentChecked = this.state.checkedRows;
+
         checked ? currentChecked.add(id) : currentChecked.delete(id);
         this.setState({ checkedRows: currentChecked });
     };
@@ -109,6 +113,7 @@ class TasksList extends Component {
         const newChecked = this.allChecked
             ? this.state.checkedRows.clear()
             : tasksMock.map(task => task.id);
+
         this.setState({ checkedRows: new Set(newChecked) });
     };
 }
