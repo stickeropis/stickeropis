@@ -1,14 +1,14 @@
 const fetch = require('cross-fetch');
 const _ = require('lodash');
 
-async function getTasks(req, res) {
-    const { project, token } = req.body;
+async function getTasks(req, res, next) {
+    const { project, accessToken } = req.body;
 
     try {
         const fetchedData = await fetch(`${project}/rest/api/2/search?jql=resolution+is+empty`, {
             method: 'get',
             headers: {
-                'Authorization': `Basic ${token}`,
+                'Authorization': `Basic ${accessToken}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -33,19 +33,19 @@ async function getTasks(req, res) {
         })));
 
     } catch (err) {
-        res.status(500).send(err);
+        err.statusCode = 500;
+        next(err);
     }
 }
 
-async function login(req, res) {
-
-    const { project, token } = req.body;
+async function auth(req, res, next) {
+    const { project, accessToken } = req.body;
 
     try {
         const fetchedData = await fetch(`${project}/rest/api/2/myself`, {
             method: 'get',
             headers: {
-                'Authorization': `Basic ${token}`,
+                'Authorization': `Basic ${accessToken}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -55,11 +55,12 @@ async function login(req, res) {
 
         res.json(data);
     } catch (err) {
-        res.status(500).send(err);
+        err.statusCode = 500;
+        next(err);
     }
 }
 
 module.exports = {
     getTasks,
-    login
+    auth
 };

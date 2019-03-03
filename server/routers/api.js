@@ -18,8 +18,8 @@ function setupApiRouter(app, server) {
         .post(jsonParser, jira.getTasks);
 
     apiRouter
-        .route('/jira/login')
-        .post(jsonParser, jira.login);
+        .route('/jira/auth')
+        .post(jsonParser, jira.auth);
 
     server.use('/api', apiRouter);
 }
