@@ -38,7 +38,7 @@ const dateFormat = 'DD.MM.YYYY';
 
 const defaultTask = () => ({
     id: '',
-    name: '',
+    title: '',
     description: '',
     priority: 1, // 0..10
     cost: 1,
@@ -61,7 +61,7 @@ const formInputs = [
         inList: true
     },
     {
-        id: 'name',
+        id: 'title',
         type: 'text',
         label: 'Краткое описание',
         required: true,
